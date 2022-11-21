@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+const Chance = require('chance');
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export const App = () => {
+	const chance = new Chance();
+	const generateUkPerson = () => {
+		return {
+			id: chance.ssn({dashes: false}),
+			name: chance.name({nationality: 'en'}),
+			address: chance.city(),
+			phone: chance.phone({country: 'uk', mobile: true}),
+		};
+	};
+	const generateUsPerson = () => {
+		return {
+			id: chance.ssn({dashes: false}),
+			name: chance.name({nationality: 'en'}),
+			address: chance.city(),
+			phone: chance.phone({country: 'us', mobile: true}),
+		};
+	};
+	const generateItPerson = () => {
+		return {
+			id: chance.ssn({dashes: false}),
+			name: chance.name({nationality: 'it'}),
+			address: `${chance.province({
+				country: 'it',
+				full: true,
+			})} city, ${chance.street({
+				country: 'it',
+			})} street`,
+			phone: chance.phone({country: 'fr', mobile: true}),
+		};
+	};
 
-export default App;
+	const peopleUk = Array.from({length: 100}, generateUkPerson);
+	const peopleUs = Array.from({length: 100}, generateUsPerson);
+	const peopleIt = Array.from({length: 100}, generateItPerson);
+
+	console.log(peopleUk);
+	console.log(peopleUs);
+	console.log(peopleIt);
+	return <div>App</div>;
+};
