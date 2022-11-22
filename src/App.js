@@ -183,8 +183,8 @@ export const App = () => {
             variant="outlined"
             sx={{ width: 100 }}
           />
-          <Button color="secondary" variant="contained">
-            Contained
+          <Button color="secondary" variant="contained" size="small">
+            Random seed
           </Button>
         </Box>
       </Box>
