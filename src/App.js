@@ -7,19 +7,17 @@ import {
   Typography,
   Input,
   TextField,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
 } from "@mui/material";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
 
 const Chance = require("chance");
-
-// table
+const chance = new Chance();
 
 const columns = [
   { id: "index", label: "Index", minWidth: 20 },
@@ -40,15 +38,9 @@ const columns = [
   },
 ];
 
-// table-end
-
 export const App = () => {
-  // table
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  // table-end
-
-  const chance = new Chance();
+  const [value, setValue] = useState(0);
+  const [data, setData] = useState([]);
   const generateUkPerson = () => {
     return {
       id: chance.ssn({ dashes: false }),
@@ -87,14 +79,13 @@ export const App = () => {
   console.log(peopleUs);
   console.log(peopleIt);
 
-  const [value, setValue] = useState(0);
-
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const handleInputChange = (event) => {
-    setValue(event.target.value === "" ? "" : Number(event.target.value));
+    setValue(event.target.value > 1000 ? 1000 : Number(event.target.value));
+    // setValue(event.target.value === "" ? "" : Number(event.target.value));
   };
 
   const handleBlur = () => {
@@ -104,17 +95,6 @@ export const App = () => {
       setValue(1000);
     }
   };
-
-  //   table
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-  //   table-end
 
   return (
     <Box
@@ -164,6 +144,7 @@ export const App = () => {
             onChange={handleInputChange}
             onBlur={handleBlur}
             color="secondary"
+            max={1000}
             inputProps={{
               step: 0.5,
               min: 0,
@@ -230,15 +211,6 @@ export const App = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 20, 100]}
-          component="div"
-          count={peopleIt.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
       </Paper>
     </Box>
   );
