@@ -10,12 +10,12 @@ import {
 	TableRow,
 } from '@mui/material';
 
-import {mockCsvHeaders} from '../mock/mockCsvHeaders';
+import {sharedCSV} from '../mock/sharedCSV';
 
 export const ListForm = ({data, itemsPerPage, setItemsPerPage}) => {
 	const csvReport = {
-		filename: 'Data.csv',
-		headers: mockCsvHeaders,
+		filename: 'fake.csv',
+		headers: sharedCSV,
 		data: data || [],
 	};
 
@@ -44,7 +44,7 @@ export const ListForm = ({data, itemsPerPage, setItemsPerPage}) => {
 				<Button
 					sx={{
 						m: '20px auto',
-						width: 100,
+						width: 300,
 						height: 50,
 						fontSize: '22px',
 						backgroundColor: '#0E101C',
@@ -56,18 +56,28 @@ export const ListForm = ({data, itemsPerPage, setItemsPerPage}) => {
 					}}
 					variant="contained"
 				>
-					CSV
+					Export to CSV
 				</Button>
 			</CSVLink>
 
-			<Table sx={{minWidth: '650px', m: '20px 0px'}}>
+			<Table sx={{minWidth: '80vw', m: '20px 0px'}}>
 				<TableHead>
-					<TableRow>
-						<TableCell align="center">Index</TableCell>
-						<TableCell align="center">ID</TableCell>
-						<TableCell align="center">Username</TableCell>
-						<TableCell align="center">Address</TableCell>
-						<TableCell align="center">Phone</TableCell>
+					<TableRow sx={{backgroundColor: 'whitesmoke'}}>
+						<TableCell sx={{fontSize: '24px'}} align="center">
+							#
+						</TableCell>
+						<TableCell sx={{fontSize: '22px'}} align="center">
+							ID
+						</TableCell>
+						<TableCell sx={{fontSize: '22px'}} align="center">
+							Username
+						</TableCell>
+						<TableCell sx={{fontSize: '22px'}} align="center">
+							Address
+						</TableCell>
+						<TableCell sx={{fontSize: '22px'}} align="center">
+							Phone
+						</TableCell>
 					</TableRow>
 				</TableHead>
 
@@ -75,13 +85,20 @@ export const ListForm = ({data, itemsPerPage, setItemsPerPage}) => {
 					{data &&
 						data.slice(0, itemsPerPage).map((item, i) => (
 							<TableRow key={item.id}>
-								<TableCell component="th" scope="row">
+								<TableCell
+									sx={{fontSize: '22px'}}
+									align="center"
+									component="th"
+									scope="row"
+								>
 									{i + 1}
 								</TableCell>
-								<TableCell align="right">{item.id}</TableCell>
-								<TableCell align="right">{item.fullname}</TableCell>
-								<TableCell align="right">{item.address}</TableCell>
-								<TableCell align="right">{item.phone}</TableCell>
+								<TableCell align="center">{item.id}</TableCell>
+								<TableCell sx={{fontSize: '18px'}} align="center">
+									{item.fullname}
+								</TableCell>
+								<TableCell align="center">{item.address}</TableCell>
+								<TableCell align="center">{item.phone}</TableCell>
 							</TableRow>
 						))}
 				</TableBody>

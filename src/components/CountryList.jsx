@@ -1,14 +1,8 @@
 import React from 'react';
 
-import {
-	FormControl,
-	FormHelperText,
-	InputLabel,
-	MenuItem,
-	Select,
-} from '@mui/material';
+import {FormControl, MenuItem, Select} from '@mui/material';
 
-import {mockCountries} from '../mock/mockCountries';
+import {sharedCountries} from '../mock/sharedCountries';
 
 export const CountryList = ({country, setCountry}) => {
 	const handleChangeCountry = (e) => {
@@ -23,7 +17,7 @@ export const CountryList = ({country, setCountry}) => {
 				onChange={handleChangeCountry}
 			>
 				<MenuItem disabled>Country</MenuItem>
-				{mockCountries.map((country) => (
+				{sharedCountries.map((country) => (
 					<MenuItem value={country} key={country}>
 						{country.toUpperCase()}
 					</MenuItem>

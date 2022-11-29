@@ -14,7 +14,7 @@ export const List = () => {
 	const [seed, setSeed] = useState(0);
 	const [page, setPage] = useState(0);
 	const [itemsPerPage, setItemsPerPage] = useState(20);
-	const [size, setSize] = useState(200);
+	const [size, setSize] = useState(1000);
 
 	const fetchUsers = async () => {
 		const data = await fakeServiceFetchData(
