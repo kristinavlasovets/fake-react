@@ -9,7 +9,7 @@ export const fakeServiceFetchData = async (
 ) => {
 	try {
 		const {data} = await axios.get(
-			'https://task5-fakegenerator-server-production.up.railway.app/api/faker' +
+			'https://fake-nodejs-production.up.railway.app/api/faker' +
 				`?seed=${seed}&error=${errorsAmount}&locale=${country}&page=${page}&size=${size}`
 		);
 
