@@ -1,15 +1,13 @@
 import React, {useState, useEffect} from 'react';
 
 import {Box} from '@mui/material';
-import {Header} from '../../components/Header/Header';
-import {ControlTool} from '../../components/ControlTool/ControlTool';
-import {CountrySelect} from '../../components/CountrySelect/CountrySelect';
-import {MyTable} from '../../components/Table/MyTable';
+import {Menu} from '../components/Menu';
+import {CountryList} from '../components/CountryList';
+import {ListForm} from '../components/ListForm';
 
-import {makeStyles} from './styles';
-import {fakeServiceFetchData} from '../../services/fakeService';
+import {fakeServiceFetchData} from '../services/fakeService';
 
-export const Main = () => {
+export const List = () => {
 	const [country, setCountry] = useState('en');
 	const [errorsAmount, setErrorsAmount] = useState(0);
 	const [data, setData] = useState([]);
@@ -17,7 +15,6 @@ export const Main = () => {
 	const [page, setPage] = useState(0);
 	const [itemsPerPage, setItemsPerPage] = useState(20);
 	const [size, setSize] = useState(200);
-	const style = makeStyles();
 
 	const fetchUsers = async () => {
 		const data = await fakeServiceFetchData(
@@ -33,22 +30,26 @@ export const Main = () => {
 
 	useEffect(() => {
 		fetchUsers();
-		// eslint-disable-next-line
 	}, [country, seed, errorsAmount, page, size]);
 
 	return (
-		<Box sx={style.mainWrapper}>
-			<Header title="Fake (random) user data generation" />
-			<Box sx={style.mainSelectWrapper}>
-				<CountrySelect country={country} setCountry={setCountry} />
+		<Box
+			sx={{
+				m: '5vh 10vw',
+				display: 'flex',
+				flexDirection: 'column',
+			}}
+		>
+			<Box>
+				<CountryList country={country} setCountry={setCountry} />
 			</Box>
-			<ControlTool
+			<Menu
 				errorsAmount={errorsAmount}
 				setErrorsAmount={setErrorsAmount}
 				seed={seed}
 				setSeed={setSeed}
 			/>
-			<MyTable
+			<ListForm
 				data={data}
 				itemsPerPage={itemsPerPage}
 				setItemsPerPage={setItemsPerPage}
